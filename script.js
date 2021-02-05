@@ -2,24 +2,22 @@
 
 // First Class Price
 
-document.getElementById('f-class-plus').addEventListener('click', function () {
-    handleTicketPrice('f-class', true);
-
+document.getElementById('first-class-plus').addEventListener('click', function () {
+    handleTicketPrice('first-class', true);
 })
 
-document.getElementById('f-class-minus').addEventListener('click', function () {
-    handleTicketPrice('f-class', false);
+document.getElementById('first-class-minus').addEventListener('click', function () {
+    handleTicketPrice('first-class', false);
 })
 
 //Economy Class Price
 
-document.getElementById('e-class-plus').addEventListener('click', function () {
-    handleTicketPrice('e-class', true);
-
+document.getElementById('economy-class-plus').addEventListener('click', function () {
+    handleTicketPrice('economy-class', true);
 })
 
-document.getElementById('e-class-minus').addEventListener('click', function () {
-    handleTicketPrice('e-class', false);
+document.getElementById('economy-class-minus').addEventListener('click', function () {
+    handleTicketPrice('economy-class', false);
 })
 
 // Common function for both Class ticket
@@ -43,9 +41,9 @@ function handleTicketPrice(ticket, isIncrease) {
 
     let ticketPrice = 0;
 
-    if (ticket == 'f-class') {
+    if (ticket == 'first-class') {
         ticketPrice = newTicketNumber * 150;
-    } else if (ticket == 'e-class') {
+    } else if (ticket == 'economy-class') {
         ticketPrice = newTicketNumber * 100;
     }
 
@@ -55,13 +53,13 @@ function handleTicketPrice(ticket, isIncrease) {
 
 //Total Price
 function calculateTotal() {
-    const fClassTicket = document.getElementById('f-class-ticket-number');
-    const fClassTicketNumber = parseInt(fClassTicket.value);
+    const firstClassTicket = document.getElementById('first-class-ticket-number');
+    const firstClassTicketNumber = parseInt(firstClassTicket.value);
 
-    const eClassTicket = document.getElementById('e-class-ticket-number');
-    const eClassTicketNumber = parseInt(eClassTicket.value);
+    const economyClassTicket = document.getElementById('economy-class-ticket-number');
+    const economyClassTicketNumber = parseInt(economyClassTicket.value);
 
-    const totalTicketPrice = fClassTicketNumber * 150 + eClassTicketNumber * 100;
+    const totalTicketPrice = firstClassTicketNumber * 150 + economyClassTicketNumber * 100;
     document.getElementById('price-subtotal').innerText = totalTicketPrice;
 
     const totalVat = 0.1 * totalTicketPrice;
@@ -77,13 +75,35 @@ function calculateTotal() {
 // Confirmation form
 
 document.getElementById('book-now-button').addEventListener('click', function () {
-    document.getElementById('booking-input').style.display = 'none';
-    document.getElementById('booking-confirmation').style.display = 'block';
 
-    document.getElementById('confirmation-flying-from').value = document.getElementById('flying-from').value;
-    document.getElementById('confirmation-flying-to').value = document.getElementById('flying-to').value;
-    document.getElementById('confirmation-departure').value = document.getElementById('departure').value;
-    document.getElementById('confirmation-return').value = document.getElementById('return').value;
+    const firstClassTicket = document.getElementById('first-class-ticket-number');
+    const firstClassTicketNumber = parseInt(firstClassTicket.value);
+
+    const economyClassTicket = document.getElementById('economy-class-ticket-number');
+    const economyClassTicketNumber = parseInt(economyClassTicket.value);
+
+    const depatureDate = document.getElementById('departure-date').value;
+    const returnDate = document.getElementById('return-date').value;
+
+    const flyingFrom = document.getElementById('flying-from').value;
+    const flyingTo = document.getElementById('flying-to').value
+
+    if ((firstClassTicketNumber > 0 || economyClassTicketNumber > 0) && (depatureDate.length > 0 && returnDate.length > 0) && (flyingFrom.length >0 && flyingTo.length>0)) {
+
+        document.getElementById('booking-input').style.display = 'none';
+        document.getElementById('booking-confirmation').style.display = 'block';
+        document.getElementById('confirmation-flying-from').value = flyingFrom;
+        document.getElementById('confirmation-flying-to').value = flyingTo;
+        document.getElementById('confirmation-departure').value = depatureDate;
+        document.getElementById('confirmation-return').value = returnDate;
+
+    } else {
+
+        alert('Please provide travel location, date and ticket number');
+
+    }
+
+
 })
 
 //End - Thank you

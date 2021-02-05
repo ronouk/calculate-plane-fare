@@ -74,8 +74,8 @@ a.active {
     margin: 10px 0;
 }
 
-.f-class,
-.e-class {
+.first-class,
+.economy-class {
     display: flex;
     justify-content: space-between;
     align-items: center;
